@@ -32,7 +32,7 @@ COPY requirements.txt .
 # Step 1: Install CPU-only PyTorch first (saves ~3GB vs CUDA version)
 # For GPU deployment, remove the --index-url flag
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
+    pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu && \
     pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
