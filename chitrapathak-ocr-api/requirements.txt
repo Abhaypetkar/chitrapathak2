@@ -8,6 +8,8 @@ uvicorn[standard]>=0.24.0
 python-multipart>=0.0.6
 
 # --- ML / Model ---
+# NOTE: For CPU-only, install torch via: pip install torch --index-url https://download.pytorch.org/whl/cpu
+# For GPU, install torch normally: pip install torch
 torch>=2.1.0
 transformers>=4.40.0
 qwen-vl-utils>=0.0.8
