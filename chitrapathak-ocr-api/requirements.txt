@@ -1,0 +1,26 @@
+# ============================================
+# Chitrapathak-2 OCR API - Dependencies
+# ============================================
+
+# --- Web Framework ---
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+
+# --- ML / Model ---
+torch>=2.1.0
+transformers>=4.40.0
+qwen-vl-utils>=0.0.8
+accelerate>=0.25.0
+
+# --- Image Processing ---
+Pillow>=10.0.0
+
+# --- System Monitoring ---
+psutil>=5.9.0
+pynvml>=11.5.0
+
+# --- Configuration ---
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+python-dotenv>=1.0.0

@@ -1,0 +1,58 @@
+# ============================================
+# Chitrapathak-2 OCR API - Docker Compose
+# ============================================
+# Usage:
+#   CPU:  docker compose up ocr-cpu
+#   GPU:  docker compose up ocr-gpu
+#   Both: docker compose up
+# ============================================
+
+version: "3.8"
+
+services:
+  # ── CPU-only deployment ──
+  ocr-cpu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chitrapathak-ocr-cpu
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./outputs:/app/outputs
+      - ./logs:/app/logs
+      - ./.env:/app/.env:ro
+    environment:
+      - MAX_WORKERS=2
+    restart: unless-stopped
+    profiles:
+      - cpu
+      - default
+
+  # ── GPU deployment (requires NVIDIA Container Toolkit) ──
+  ocr-gpu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chitrapathak-ocr-gpu
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./outputs:/app/outputs
+      - ./logs:/app/logs
+      - ./.env:/app/.env:ro
+    environment:
+      - MAX_WORKERS=2
+      - NVIDIA_VISIBLE_DEVICES=all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+    profiles:
+      - gpu
